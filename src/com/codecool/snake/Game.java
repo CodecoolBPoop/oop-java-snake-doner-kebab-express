@@ -1,6 +1,7 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.enemies.SimpleEnemy;
+import com.codecool.snake.entities.enemies.StrongerEnemy;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.Scene;
@@ -9,12 +10,19 @@ import javafx.scene.layout.Pane;
 public class Game extends Pane {
 
     public Game() {
-        new SnakeHead(this, 500, 500);
+        SnakeHead head = new SnakeHead(this, 500, 500);
 
         new SimpleEnemy(this);
         new SimpleEnemy(this);
         new SimpleEnemy(this);
         new SimpleEnemy(this);
+        new StrongerEnemy(this, head);
+        new StrongerEnemy(this, head);
+        new StrongerEnemy(this, head);
+        new StrongerEnemy(this, head);
+        new StrongerEnemy(this, head);
+        new StrongerEnemy(this, head);
+        new StrongerEnemy(this, head);
 
         new SimplePowerup(this);
         new SimplePowerup(this);
@@ -28,6 +36,7 @@ public class Game extends Pane {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = true; break;
                 case RIGHT: Globals.rightKeyDown  = true; break;
+                case SPACE: Globals.spaceDown = true; break;
             }
         });
 
@@ -35,6 +44,7 @@ public class Game extends Pane {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = false; break;
                 case RIGHT: Globals.rightKeyDown  = false; break;
+                case SPACE: Globals.spaceDown  = false; break;
             }
         });
         Globals.gameLoop = new GameLoop();
