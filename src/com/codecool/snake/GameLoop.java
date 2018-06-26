@@ -4,6 +4,8 @@ import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Animatable;
 import javafx.animation.AnimationTimer;
 
+import java.util.Random;
+
 public class GameLoop extends AnimationTimer {
 
     // This gets called every 1/60 seconds
@@ -20,5 +22,16 @@ public class GameLoop extends AnimationTimer {
 
         Globals.gameObjects.removeAll(Globals.oldGameObjects);
         Globals.oldGameObjects.clear();
+    }
+
+
+    public void spawnMoreEnemies(){
+        Random enemyRnd = new Random();
+
+        int rnd = enemyRnd.nextInt(500);
+
+
+
+
     }
 }

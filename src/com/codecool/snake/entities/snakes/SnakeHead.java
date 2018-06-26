@@ -5,6 +5,7 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
+import com.codecool.snake.entities.Laser;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
@@ -14,9 +15,10 @@ public class SnakeHead extends GameEntity implements Animatable {
     private static final float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
-    private static double headDir = 0;
-    private static double headDirX = 0;
-    private static double headDirY = 0;
+    private double currentX;
+    private double currentY;
+    private double currentDir;
+    private long laserLastShot;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -28,6 +30,8 @@ public class SnakeHead extends GameEntity implements Animatable {
         pane.getChildren().add(this);
 
         addPart(4);
+
+        laserLastShot = System.currentTimeMillis();
     }
 
     public void step() {
@@ -40,12 +44,20 @@ public class SnakeHead extends GameEntity implements Animatable {
         }
         // set rotation and position
         setRotate(dir);
-        headDir = dir;
         Point2D heading = Utils.directionToVector(dir, speed);
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
-        headDirX = getX() + heading.getX();
-        headDirY = getY() + heading.getY();
+        currentX = getX() + heading.getX();
+        currentY = getY() + heading.getY();
+        currentDir = dir;
+
+        if(Globals.spaceDown){
+            if(System.currentTimeMillis() - laserLastShot > 125) {
+                Laser blast = new Laser(pane, this);
+                blast.getMessage();
+                laserLastShot = System.currentTimeMillis();
+            }
+        }
 
         // check if collided with an enemy or a powerup
         for (GameEntity entity : Globals.getGameObjects()) {
@@ -53,7 +65,6 @@ public class SnakeHead extends GameEntity implements Animatable {
                 if (entity instanceof Interactable) {
                     Interactable interactable = (Interactable) entity;
                     interactable.apply(this);
-                    System.out.println(interactable.getMessage());
                 }
             }
         }
@@ -76,11 +87,15 @@ public class SnakeHead extends GameEntity implements Animatable {
         health += diff;
     }
 
-    public static double returnX() { return headDirX; }
+    public double getCurrentX() {
+        return currentX;
+    }
 
-    public static double returnY() { return headDirY; }
+    public double getCurrentY() {
+        return currentY;
+    }
 
-    public static double getHeadDir() {
-        return headDir;
+    public double getCurrentDir() {
+        return currentDir;
     }
 }
