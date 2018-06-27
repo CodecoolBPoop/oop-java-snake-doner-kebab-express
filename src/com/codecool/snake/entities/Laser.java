@@ -51,9 +51,14 @@ public class Laser extends GameEntity implements Interactable,Animatable {
 
         for (GameEntity entity : Globals.getGameObjects()) {
             if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
-                if (entity instanceof SimpleEnemy || entity instanceof StrongerEnemy) {
+                if (entity instanceof SimpleEnemy) {
                     apply(entity);
+                    this.destroy();
                     System.out.println("Enemy killed!");
+                }
+                if (entity instanceof StrongerEnemy) {
+                    this.destroy();
+                    ((StrongerEnemy) entity).decreseHealth();
                 }
             }
         }
