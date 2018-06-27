@@ -23,10 +23,7 @@ public class Game extends Pane {
         new StrongerEnemy(this);
         new StrongerEnemy(this);
         new StrongerEnemy(this);
-        new StrongerEnemy(this);
-        new StrongerEnemy(this);
-        new StrongerEnemy(this);
-        new StrongerEnemy(this);
+
 
         new SimplePowerup(this);
         new SimplePowerup(this);
@@ -62,5 +59,10 @@ public class Game extends Pane {
         });
         Globals.gameLoop = new GameLoop();
         Globals.gameLoop.start();
+        Globals.game = this;
+    }
+
+    public Pane getPane(){
+        return this;
     }
 }
