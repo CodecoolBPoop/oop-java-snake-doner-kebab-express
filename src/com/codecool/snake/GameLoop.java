@@ -27,6 +27,10 @@ public class GameLoop extends AnimationTimer {
 
         Globals.gameObjects.removeAll(Globals.oldGameObjects);
         Globals.oldGameObjects.clear();
+
+        if (Globals.isPlayerDead[0] == true && Globals.isPlayerDead[1] == true) {
+            this.stop();
+        }
     }
 
     private int countEnemies(){
