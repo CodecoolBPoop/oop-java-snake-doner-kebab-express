@@ -31,7 +31,6 @@ public class Game extends Pane {
         setPlayers(scene);
 
         //if (numberOfPlayers == 1) { setEnemies(); }
-        System.out.println(Globals.leftKeyDown[1]);
         setPowerUps();
 
         Globals.addTextOfHealths();
@@ -40,7 +39,6 @@ public class Game extends Pane {
 
         Globals.gameLoop = new GameLoop();
         Globals.gameLoop.start();
-
     }
 
     private void setPlayers(Scene scene) {
