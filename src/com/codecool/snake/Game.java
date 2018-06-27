@@ -28,7 +28,7 @@ public class Game extends Pane {
         Scene scene = getScene();
         setPlayers(scene);
 
-        if (Globals.numberOfPlayers == 1) { setEnemies(); }
+        if (numberOfPlayers == 1) { setEnemies(); }
 
         setPowerUps();
 
