@@ -12,7 +12,6 @@ import javafx.scene.layout.Pane;
 
 import java.util.Random;
 
-// a simple enemy TODO make better ones.
 public class StrongerEnemy extends GameEntity implements Animatable, Interactable {
 
     private Point2D heading;
@@ -20,7 +19,7 @@ public class StrongerEnemy extends GameEntity implements Animatable, Interactabl
     private int health;
 
 
-    public StrongerEnemy(Pane pane, SnakeHead head) {
+    public StrongerEnemy(Pane pane) {
         super(pane);
         health = 3;
 
