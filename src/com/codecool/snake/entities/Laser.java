@@ -13,7 +13,7 @@ import javafx.geometry.Point2D;
 public class Laser extends GameEntity implements Interactable,Animatable {
 
     private Point2D heading;
-    private double speed = 2;
+    private double speed = 4;
 
     public Laser(Pane pane, SnakeHead snakeHead){
         super(pane);
