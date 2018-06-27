@@ -23,6 +23,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     private boolean isInvulnerable;
     private long invulnerabilityTimer;
 
+
     public SnakeHead(Pane pane, int xc, int yc, int snakeID) {
         super(pane);
         setX(xc);
@@ -111,7 +112,9 @@ public class SnakeHead extends GameEntity implements Animatable {
         for (int i = 0; i < numParts; i++) {
             SnakeBody newPart = new SnakeBody(pane, tail, this.snakeID);
             tail = newPart;
+
         }
+        Globals.snakeLengths[snakeID] += numParts;
     }
 
     public void changeHealth(int diff) {

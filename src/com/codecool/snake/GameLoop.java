@@ -9,6 +9,8 @@ import com.codecool.snake.entities.powerups.BuffedFood;
 import com.codecool.snake.entities.powerups.MoreHealthPowerUp;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import javafx.animation.AnimationTimer;
+import com.codecool.snake.GameOverPopUp;
+import javafx.stage.Stage;
 
 import java.util.Random;
 
@@ -39,6 +41,12 @@ public class GameLoop extends AnimationTimer {
 
         if (Globals.isPlayerDead[0] == true && Globals.isPlayerDead[1] == true) {
             this.stop();
+            GameOverPopUp popUp = new GameOverPopUp(Globals.stage);
+        }
+
+        if(Globals.numberOfPlayers == 1 && Globals.isPlayerDead[0] == true){
+            this.stop();
+            GameOverPopUp popUp = new GameOverPopUp(Globals.stage);
         }
     }
 

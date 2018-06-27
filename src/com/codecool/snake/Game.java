@@ -90,4 +90,7 @@ public class Game extends Pane {
         new BuffedFood(this);
         new BuffedFood(this);
     }
+
+
+
 }
