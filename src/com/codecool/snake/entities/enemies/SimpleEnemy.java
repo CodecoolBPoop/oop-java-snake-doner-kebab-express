@@ -41,8 +41,6 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
 
-
-
     }
 
     @Override

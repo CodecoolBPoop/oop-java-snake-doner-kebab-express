@@ -19,7 +19,7 @@ public class StrongerEnemy extends GameEntity implements Animatable, Interactabl
     private static final int damage = 10;
 
 
-    public StrongerEnemy(Pane pane, SnakeHead head) {
+    public StrongerEnemy(Pane pane) {
         super(pane);
 
         setImage(Globals.strongerEnemy);
