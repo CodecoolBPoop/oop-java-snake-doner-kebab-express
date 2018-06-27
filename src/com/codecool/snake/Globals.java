@@ -26,6 +26,7 @@ public class Globals {
     public static Image annoyingEnemy = new Image("snake_head.png");
     public static Image powerupBerry = new Image("powerup_berry.png");
     public static Image laserShot = new Image("laser-resized03.png");
+    public static Image moreHealth = new Image("moreHealth.png");
     //.. put here the other images you want to use
 
     public static boolean[] leftKeyDown = new boolean[2];

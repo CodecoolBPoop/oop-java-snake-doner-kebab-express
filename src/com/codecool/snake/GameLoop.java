@@ -5,6 +5,8 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.enemies.AnnoyingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.enemies.StrongerEnemy;
+import com.codecool.snake.entities.powerups.MoreHealthPowerUp;
+import com.codecool.snake.entities.powerups.SimplePowerup;
 import javafx.animation.AnimationTimer;
 
 import java.util.Random;
@@ -21,6 +23,7 @@ public class GameLoop extends AnimationTimer {
             }
         }
         spawnMoreEnemies();
+        spawnMorePowerUps();
 
         Globals.gameObjects.addAll(Globals.newGameObjects);
         Globals.newGameObjects.clear();
@@ -50,8 +53,17 @@ public class GameLoop extends AnimationTimer {
         }else if(rnd == 50){
             Globals.newGameObjects.add(new AnnoyingEnemy(Globals.game));
         }
+    }
 
+    private void spawnMorePowerUps(){
+        Random powerUpRnd = new Random();
+        int rnd = powerUpRnd.nextInt(750);
 
+        if(rnd == 500){
+            Globals.newGameObjects.add(new SimplePowerup(Globals.game));
+        }else if (rnd == 250){
+            Globals.newGameObjects.add(new MoreHealthPowerUp(Globals.game));
 
+        }
     }
 }

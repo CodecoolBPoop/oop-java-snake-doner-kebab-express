@@ -131,5 +131,9 @@ public class SnakeHead extends GameEntity implements Animatable {
         return this.snakeID;
     }
 
+    public int getSnakeHealth(){
+        return this.health;
+    }
+
 
 }
