@@ -57,6 +57,9 @@ public class SnakeHead extends GameEntity implements Animatable {
         currentX = getX() + heading.getX();
         currentY = getY() + heading.getY();
         currentDir = dir;
+        Globals.snakeHeadDir = dir;
+        Globals.snakeHeadX = currentX;
+        Globals.snakeHeadY = currentY;
 
         if(Globals.shootingKeyDown[snakeID]){
             if(System.currentTimeMillis() - laserLastShot > 125) {
@@ -130,16 +133,5 @@ public class SnakeHead extends GameEntity implements Animatable {
         return this.snakeID;
     }
 
-    public double getCurrentX() {
-        return currentX;
-    }
-
-    public double getCurrentY() {
-        return currentY;
-    }
-
-    public double getCurrentDir() {
-        return currentDir;
-    }
 
 }

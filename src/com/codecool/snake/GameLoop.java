@@ -2,6 +2,9 @@ package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Animatable;
+import com.codecool.snake.entities.enemies.AnnoyingEnemy;
+import com.codecool.snake.entities.enemies.SimpleEnemy;
+import com.codecool.snake.entities.enemies.StrongerEnemy;
 import javafx.animation.AnimationTimer;
 
 import java.util.Random;
@@ -17,6 +20,8 @@ public class GameLoop extends AnimationTimer {
                 animObject.step();
             }
         }
+        spawnMoreEnemies();
+
         Globals.gameObjects.addAll(Globals.newGameObjects);
         Globals.newGameObjects.clear();
 
@@ -28,12 +33,27 @@ public class GameLoop extends AnimationTimer {
         }
     }
 
+    private int countEnemies(){
+        int count = 0;
+        for(GameEntity entity: Globals.getGameObjects()){
+            if(entity instanceof SimpleEnemy){
+                count++;
+            }
+        }
+        return count;
+    }
 
-    public void spawnMoreEnemies(){
+    private void spawnMoreEnemies(){
         Random enemyRnd = new Random();
+        int rnd = enemyRnd.nextInt(300);
 
-        int rnd = enemyRnd.nextInt(500);
-
+        if(rnd == 250){
+            Globals.newGameObjects.add(new SimpleEnemy(Globals.game));
+        }else if(rnd == 150){
+            Globals.newGameObjects.add(new StrongerEnemy(Globals.game));
+        }else if(rnd == 50){
+            Globals.newGameObjects.add(new AnnoyingEnemy(Globals.game));
+        }
 
 
 
