@@ -20,7 +20,9 @@ public class GameLoop extends AnimationTimer {
                 animObject.step();
             }
         }
-        spawnMoreEnemies();
+        if (Globals.numberOfPlayers == 1) {
+            spawnMoreEnemies();
+        }
 
         Globals.gameObjects.addAll(Globals.newGameObjects);
         Globals.newGameObjects.clear();
