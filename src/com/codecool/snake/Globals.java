@@ -23,6 +23,7 @@ public class Globals {
     public static Image[] snakeBody = {new Image("snake_body0.png"), new Image("snake_body1.png")};
     public static Image simpleEnemy = new Image("simple_enemy.png");
     public static Image strongerEnemy = new Image("stronger_enemy.png");
+    public static Image annoyingEnemy = new Image("snake_head.png");
     public static Image powerupBerry = new Image("powerup_berry.png");
     public static Image laserShot = new Image("laser-resized03.png");
     //.. put here the other images you want to use
@@ -38,6 +39,10 @@ public class Globals {
     public static List<GameEntity> newGameObjects; // Holds game objects created in this frame.
     public static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
     public static GameLoop gameLoop;
+    public static Game game;
+    public static double snakeHeadX;
+    public static double snakeHeadY;
+    public static double snakeHeadDir;
 
     static {
         gameObjects = new LinkedList<>();

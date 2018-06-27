@@ -6,27 +6,24 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
-import com.sun.javafx.geom.Vec2d;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
+import java.util.List;
 import java.util.Random;
 
-public class StrongerEnemy extends GameEntity implements Animatable, Interactable {
+public class AnnoyingEnemy extends GameEntity implements Animatable, Interactable {
 
     private Point2D heading;
-    private static final int damage = 10;
-    private int health;
+    private static final int damage = 3;
 
 
-    public StrongerEnemy(Pane pane) {
+    public AnnoyingEnemy(Pane pane) {
         super(pane);
-        health = 3;
 
-        setImage(Globals.strongerEnemy);
+        setImage(Globals.annoyingEnemy);
         pane.getChildren().add(this);
         Random rnd = new Random();
-
         double candidateX;
         double candidateY;
 
@@ -38,25 +35,30 @@ public class StrongerEnemy extends GameEntity implements Animatable, Interactabl
 
         setX(candidateX);
         setY(candidateY);
-
-        double direction = rnd.nextDouble() * 360;
-        setRotate(direction);
-        int speed = 1;
-        heading = Utils.directionToVector(direction, speed);
     }
 
     @Override
     public void step() {
-        if (this.health < 1) { destroy(); }
-        if (isOutOfBounds()) {
-            if (getX() >= 1000 || getX() <= 0) {
-                heading = new Point2D(heading.getX() * -1, heading.getY());
-            } else if (getY() >= 700 || getY() <= 0) {
-                heading = new Point2D(heading.getX(), heading.getY() * -1);
+        List<Point2D> laserPositions = Utils.laserPositions();
+        for (Point2D laser : laserPositions) {
+            if (Math.abs(laser.getX() - this.getX()) < 25 && Math.abs(laser.getY() - this.getY()) < 25) {
+                Random rnd = new Random();
+                this.setX(getX() + (rnd.nextInt(30) - 15));
+                this.setY(getY() + (rnd.nextInt(30) - 15));
+                if (isOutOfBounds()) {
+                    double candidateX;
+                    double candidateY;
+
+                    do {
+                        candidateX = rnd.nextDouble() * Globals.WINDOW_WIDTH;
+                        candidateY = rnd.nextDouble() * Globals.WINDOW_HEIGHT;
+                    }while (candidateX == Globals.snakeHeadX && candidateY == Globals.snakeHeadY);
+
+                    setX(candidateX);
+                    setY(candidateY);
+                }
             }
         }
-        setX(getX() + heading.getX());
-        setY(getY() + heading.getY());
     }
 
     @Override
@@ -70,8 +72,4 @@ public class StrongerEnemy extends GameEntity implements Animatable, Interactabl
         return "10 damage";
     }
 
-
-    public void decreseHealth() {
-        this.health--;
-    }
 }
