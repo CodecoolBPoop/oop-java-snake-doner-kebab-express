@@ -25,8 +25,20 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
         pane.getChildren().add(this);
         int speed = 1;
         Random rnd = new Random();
-        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+
+
+        // kirakni a headeket globalba és csekkolni, először, hogy létezik-e és utána, hogy intersectelnek
+
+        double candidateX;
+        double candidateY;
+
+        do {
+            candidateX = rnd.nextDouble() * Globals.WINDOW_WIDTH;
+            candidateY = rnd.nextDouble() * Globals.WINDOW_HEIGHT;
+        }while (candidateX == Globals.snakeHeadX && candidateY == Globals.snakeHeadY);
+
+        setX(candidateX);
+        setY(candidateY);
 
         double direction = rnd.nextDouble() * 360;
         setRotate(direction);

@@ -29,6 +29,9 @@ public class Globals {
     public static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
     public static GameLoop gameLoop;
     public static Game game;
+    public static double snakeHeadX;
+    public static double snakeHeadY;
+    public static double snakeHeadDir;
 
     static {
         gameObjects = new LinkedList<>();

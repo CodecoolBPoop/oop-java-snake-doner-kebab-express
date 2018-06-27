@@ -24,7 +24,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         super(pane);
         setX(xc);
         setY(yc);
-        health = 100;
+        health = 100000;
         tail = this;
         setImage(Globals.snakeHead);
         pane.getChildren().add(this);
@@ -50,6 +50,9 @@ public class SnakeHead extends GameEntity implements Animatable {
         currentX = getX() + heading.getX();
         currentY = getY() + heading.getY();
         currentDir = dir;
+        Globals.snakeHeadDir = dir;
+        Globals.snakeHeadX = currentX;
+        Globals.snakeHeadY = currentY;
 
         if(Globals.spaceDown){
             if(System.currentTimeMillis() - laserLastShot > 125) {
@@ -87,15 +90,5 @@ public class SnakeHead extends GameEntity implements Animatable {
         health += diff;
     }
 
-    public double getCurrentX() {
-        return currentX;
-    }
 
-    public double getCurrentY() {
-        return currentY;
-    }
-
-    public double getCurrentDir() {
-        return currentDir;
-    }
 }
