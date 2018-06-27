@@ -27,7 +27,7 @@ public class GameOverPopUp {
         if(Globals.numberOfPlayers == 1){
             text = "Final length of your snake was " + Globals.snakeLengths[0];
         }else{
-            text = "Final length of Snake 1 was " + Globals.snakeLengths[0] + "\n Final length of Snake 2 was " + Globals.snakeLengths[1];
+            text = "Final length of Snake 1 was " + Globals.snakeLengths[0] + "\nFinal length of Snake 2 was " + Globals.snakeLengths[1];
         }
         dialogVbox.getChildren().add(new Text(text));
 

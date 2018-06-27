@@ -36,9 +36,6 @@ public class GameLoop extends AnimationTimer {
         Globals.gameObjects.addAll(Globals.newGameObjects);
         Globals.newGameObjects.clear();
 
-        //System.out.println(Globals.leftKeyDown[0]);
-        System.out.println(Globals.leftKeyDown[1]);
-
         Globals.gameObjects.removeAll(Globals.oldGameObjects);
         Globals.oldGameObjects.clear();
 
@@ -66,7 +63,7 @@ public class GameLoop extends AnimationTimer {
 
     private void spawnMoreEnemies(){
         Random enemyRnd = new Random();
-        int rnd = enemyRnd.nextInt(3000);
+        int rnd = enemyRnd.nextInt(300);
 
         if(rnd == 250){
             Globals.newGameObjects.add(new SimpleEnemy(Globals.game));
@@ -79,7 +76,7 @@ public class GameLoop extends AnimationTimer {
 
     private void spawnMorePowerUps(){
         Random powerUpRnd = new Random();
-        int rnd = powerUpRnd.nextInt(7500);
+        int rnd = powerUpRnd.nextInt(3000);
 
         if(rnd == 500){
             Globals.newGameObjects.add(new SimplePowerup(Globals.game));

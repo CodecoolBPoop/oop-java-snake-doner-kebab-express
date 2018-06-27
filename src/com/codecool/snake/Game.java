@@ -51,10 +51,10 @@ public class Game extends Pane {
                 case LEFT:  Globals.leftKeyDown[0] = true; break;
                 case RIGHT: Globals.rightKeyDown[0] = true; break;
                 case M: Globals.shootingKeyDown[0] = true; break;
-                case R: Globals.gameLoop.stop(); this.start(Globals.numberOfPlayers);
                 case A: if (Globals.numberOfPlayers == 2) { Globals.leftKeyDown[1] = true; break; }
                 case D: if (Globals.numberOfPlayers == 2) { Globals.rightKeyDown[1] = true; break; }
                 case W: if (Globals.numberOfPlayers == 2) { Globals.shootingKeyDown[1] = true; break; }
+                case R: Globals.gameLoop.stop(); this.start(Globals.numberOfPlayers);
             }
         });
 
