@@ -3,6 +3,7 @@ package com.codecool.snake;
 import com.codecool.snake.entities.enemies.AnnoyingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.enemies.StrongerEnemy;
+import com.codecool.snake.entities.powerups.BuffedFood;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.Scene;
@@ -12,7 +13,7 @@ import javafx.stage.Stage;
 public class Game extends Pane {
 
     public Game() {
-
+        Globals.game = this;
     }
 
     public void menu(Stage stage) {
@@ -26,7 +27,7 @@ public class Game extends Pane {
         Scene scene = getScene();
         setPlayers(scene);
 
-        if (Globals.numberOfPlayers == 1) { setEnemies(); }
+        if (numberOfPlayers == 1) { setEnemies(); }
 
         setPowerUps();
 
@@ -74,17 +75,19 @@ public class Game extends Pane {
         new SimpleEnemy(this);
         new StrongerEnemy(this);
         new StrongerEnemy(this);
-        new StrongerEnemy(this);
-        new StrongerEnemy(this);
-        new StrongerEnemy(this);
-        new StrongerEnemy(this);
-        new StrongerEnemy(this);
+        new AnnoyingEnemy(this);
+        new AnnoyingEnemy(this);
+        new AnnoyingEnemy(this);
+
     }
 
     private void setPowerUps() {
         new SimplePowerup(this);
         new SimplePowerup(this);
         new SimplePowerup(this);
-        new SimplePowerup(this);
+        new BuffedFood(this);
+        new BuffedFood(this);
+        new BuffedFood(this);
+        new BuffedFood(this);
     }
 }
