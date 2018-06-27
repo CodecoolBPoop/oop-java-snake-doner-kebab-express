@@ -17,10 +17,12 @@ public class StrongerEnemy extends GameEntity implements Animatable, Interactabl
 
     private Point2D heading;
     private static final int damage = 10;
+    private int health;
 
 
     public StrongerEnemy(Pane pane, SnakeHead head) {
         super(pane);
+        health = 3;
 
         setImage(Globals.strongerEnemy);
         pane.getChildren().add(this);
@@ -30,12 +32,13 @@ public class StrongerEnemy extends GameEntity implements Animatable, Interactabl
 
         double direction = rnd.nextDouble() * 360;
         setRotate(direction);
-        int speed = 2;
+        double speed = 0.5f;
         heading = Utils.directionToVector(direction, speed);
     }
 
     @Override
     public void step() {
+        if (this.health < 1) { destroy(); }
         if (isOutOfBounds()) {
             if (getX() >= 1000 || getX() <= 0) {
                 heading = new Point2D(heading.getX() * -1, heading.getY());
@@ -56,5 +59,10 @@ public class StrongerEnemy extends GameEntity implements Animatable, Interactabl
     @Override
     public String getMessage() {
         return "10 damage";
+    }
+
+
+    public void decreseHealth() {
+        this.health--;
     }
 }
