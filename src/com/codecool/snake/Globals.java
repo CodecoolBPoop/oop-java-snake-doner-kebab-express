@@ -19,7 +19,7 @@ public class Globals {
     public static final double WINDOW_HEIGHT = 700;
 
     public static Image snakeHead = new Image("snake_head.png");
-    public static Image snakeBody = new Image("snake_body.png");
+    public static Image[] snakeBody = {new Image("snake_body0.png"), new Image("snake_body1.png")};
     public static Image simpleEnemy = new Image("simple_enemy.png");
     public static Image strongerEnemy = new Image("stronger_enemy.png", 40, 40, true, true);
     public static Image annoyingEnemy = new Image("annoying_enemy.png", 40, 40, true, true);
