@@ -26,12 +26,22 @@ public class StrongerEnemy extends GameEntity implements Animatable, Interactabl
         setImage(Globals.strongerEnemy);
         pane.getChildren().add(this);
         Random rnd = new Random();
-        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+
+        double candidateX;
+        double candidateY;
+
+        do {
+            candidateX = rnd.nextDouble() * Globals.WINDOW_WIDTH;
+            candidateY = rnd.nextDouble() * Globals.WINDOW_HEIGHT;
+        }while (candidateX == Globals.snakeHeadX && candidateY == Globals.snakeHeadY);
+
+
+        setX(candidateX);
+        setY(candidateY);
 
         double direction = rnd.nextDouble() * 360;
         setRotate(direction);
-        double speed = 0.5f;
+        int speed = 1;
         heading = Utils.directionToVector(direction, speed);
     }
 

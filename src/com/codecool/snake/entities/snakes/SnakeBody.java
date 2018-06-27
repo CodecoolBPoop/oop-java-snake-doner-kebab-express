@@ -16,11 +16,12 @@ public class SnakeBody extends GameEntity implements Animatable {
     private GameEntity parent;
     private Queue<Vec2d> history = new LinkedList<>();
     private static final int historySize = 10;
+    private int snakeID;
 
-
-    public SnakeBody(Pane pane, GameEntity parent) {
+    public SnakeBody(Pane pane, GameEntity parent, int snakeID) {
         super(pane);
         this.parent = parent;
+        this.snakeID = snakeID;
         setImage(Globals.snakeBody);
 
         // place it visually below the current tail
@@ -41,6 +42,10 @@ public class SnakeBody extends GameEntity implements Animatable {
         setX(pos.x);
         setY(pos.y);
         history.add(new Vec2d(parent.getX(), parent.getY())); // add the parent's current position to the beginning of the history
+    }
+
+    public int getSnakeID() {
+        return this.snakeID;
     }
 
 }

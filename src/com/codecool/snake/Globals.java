@@ -2,6 +2,12 @@ package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
 import javafx.scene.image.Image;
+import java.util.ArrayList;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.paint.Color;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -22,13 +28,19 @@ public class Globals {
     public static Image laserShot = new Image("laser-resized03.png");
     //.. put here the other images you want to use
 
-    public static boolean leftKeyDown;
-    public static boolean rightKeyDown;
-    public static boolean spaceDown;
+    public static boolean[] leftKeyDown = new boolean[2];
+    public static boolean[] rightKeyDown = new boolean[2];
+    public static boolean[] shootingKeyDown = new boolean[2];
+    public static Text[] textOfHealth = new Text[2];
+
     public static List<GameEntity> gameObjects;
     public static List<GameEntity> newGameObjects; // Holds game objects created in this frame.
     public static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
     public static GameLoop gameLoop;
+    public static Game game;
+    public static double snakeHeadX;
+    public static double snakeHeadY;
+    public static double snakeHeadDir;
 
     static {
         gameObjects = new LinkedList<>();
@@ -47,4 +59,22 @@ public class Globals {
     public static List<GameEntity> getGameObjects() {
         return Collections.unmodifiableList(gameObjects);
     }
+
+    public static void addTextOfHealths() {
+        textOfHealth[0] = new Text();
+        textOfHealth[0].setText("100");
+        textOfHealth[0].setFont(Font.font("Sans Serif", FontWeight.NORMAL, FontPosture.REGULAR, 32));
+        textOfHealth[0].setFill(Color.RED);
+        textOfHealth[0].setX(1200);
+        textOfHealth[0].setY(30);
+
+        textOfHealth[1] = new Text();
+        textOfHealth[1].setText("100");
+        textOfHealth[1].setFont(Font.font("Sans Serif", FontWeight.NORMAL, FontPosture.REGULAR, 32));
+        textOfHealth[1].setFill(Color.RED);
+        textOfHealth[1].setX(10);
+        textOfHealth[1].setY(30);
+    }
+
+
 }

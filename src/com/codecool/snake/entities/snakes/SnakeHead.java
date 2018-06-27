@@ -1,5 +1,6 @@
 package com.codecool.snake.entities.snakes;
 
+import com.codecool.snake.Game;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
@@ -15,17 +16,19 @@ public class SnakeHead extends GameEntity implements Animatable {
     private static final float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
+    private int snakeID;
     private double currentX;
     private double currentY;
     private double currentDir;
     private long laserLastShot;
 
-    public SnakeHead(Pane pane, int xc, int yc) {
+    public SnakeHead(Pane pane, int xc, int yc, int snakeID) {
         super(pane);
         setX(xc);
         setY(yc);
         health = 100;
         tail = this;
+        this.snakeID = snakeID;
         setImage(Globals.snakeHead);
         pane.getChildren().add(this);
 
@@ -34,12 +37,16 @@ public class SnakeHead extends GameEntity implements Animatable {
         laserLastShot = System.currentTimeMillis();
     }
 
+    public int getHealth() {
+        return this.health;
+    }
+
     public void step() {
         double dir = getRotate();
-        if (Globals.leftKeyDown) {
+        if (Globals.leftKeyDown[snakeID]) {
             dir = dir - turnRate;
         }
-        if (Globals.rightKeyDown) {
+        if (Globals.rightKeyDown[snakeID]) {
             dir = dir + turnRate;
         }
         // set rotation and position
@@ -50,8 +57,11 @@ public class SnakeHead extends GameEntity implements Animatable {
         currentX = getX() + heading.getX();
         currentY = getY() + heading.getY();
         currentDir = dir;
+        Globals.snakeHeadDir = dir;
+        Globals.snakeHeadX = currentX;
+        Globals.snakeHeadY = currentY;
 
-        if(Globals.spaceDown){
+        if(Globals.shootingKeyDown[snakeID]){
             if(System.currentTimeMillis() - laserLastShot > 125) {
                 Laser blast = new Laser(pane, this);
                 blast.getMessage();
@@ -69,6 +79,18 @@ public class SnakeHead extends GameEntity implements Animatable {
             }
         }
 
+        // check if collided with the other player
+        for (GameEntity entity : Globals.getGameObjects()) {
+            if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
+                if (entity instanceof SnakeBody) {
+                    if (((SnakeBody) entity).getSnakeID() != this.snakeID) {
+                        collision(this.snakeID == 1 ? 1 : 0);
+                        break;
+                    }
+                }
+            }
+        }
+
         // check for game over condition
         if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
@@ -78,24 +100,36 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void addPart(int numParts) {
         for (int i = 0; i < numParts; i++) {
-            SnakeBody newPart = new SnakeBody(pane, tail);
+            SnakeBody newPart = new SnakeBody(pane, tail, this.snakeID);
             tail = newPart;
         }
     }
 
     public void changeHealth(int diff) {
         health += diff;
+        Globals.textOfHealth[snakeID].setText(String.valueOf(health));
     }
 
-    public double getCurrentX() {
-        return currentX;
+    public void collision(int snakeID) {
+        for (GameEntity entity : Globals.getGameObjects()) {
+            if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
+                if (entity instanceof SnakeBody) {
+                    if (((SnakeBody) entity).getSnakeID() == snakeID) {
+                        entity.destroy();
+                    }
+                }
+                if (entity instanceof SnakeHead) {
+                    if (((SnakeHead) entity).getSnakeID() == snakeID) {
+                        entity.destroy();
+                    }
+                }
+            }
+        }
     }
 
-    public double getCurrentY() {
-        return currentY;
+    public int getSnakeID() {
+        return this.snakeID;
     }
 
-    public double getCurrentDir() {
-        return currentDir;
-    }
+
 }
