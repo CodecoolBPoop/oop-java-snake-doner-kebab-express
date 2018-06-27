@@ -2,6 +2,7 @@ package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Animatable;
+import com.codecool.snake.entities.enemies.AnnoyingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.enemies.StrongerEnemy;
 import javafx.animation.AnimationTimer;
@@ -46,6 +47,8 @@ public class GameLoop extends AnimationTimer {
             Globals.newGameObjects.add(new SimpleEnemy(Globals.game));
         }else if(rnd == 150){
             Globals.newGameObjects.add(new StrongerEnemy(Globals.game));
+        }else if(rnd == 50){
+            Globals.newGameObjects.add(new AnnoyingEnemy(Globals.game));
         }
 
 

@@ -15,7 +15,7 @@ import java.util.Random;
 public class AnnoyingEnemy extends GameEntity implements Animatable, Interactable {
 
     private Point2D heading;
-    private static final int damage = 5;
+    private static final int damage = 3;
 
 
     public AnnoyingEnemy(Pane pane) {
@@ -24,8 +24,17 @@ public class AnnoyingEnemy extends GameEntity implements Animatable, Interactabl
         setImage(Globals.annoyingEnemy);
         pane.getChildren().add(this);
         Random rnd = new Random();
-        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+        double candidateX;
+        double candidateY;
+
+        do {
+            candidateX = rnd.nextDouble() * Globals.WINDOW_WIDTH;
+            candidateY = rnd.nextDouble() * Globals.WINDOW_HEIGHT;
+        }while (candidateX == Globals.snakeHeadX && candidateY == Globals.snakeHeadY);
+
+
+        setX(candidateX);
+        setY(candidateY);
     }
 
     @Override
@@ -34,11 +43,19 @@ public class AnnoyingEnemy extends GameEntity implements Animatable, Interactabl
         for (Point2D laser : laserPositions) {
             if (Math.abs(laser.getX() - this.getX()) < 25 && Math.abs(laser.getY() - this.getY()) < 25) {
                 Random rnd = new Random();
-                this.setX(getX() + (rnd.nextDouble() * 15));
-                this.setY(getY() + (rnd.nextDouble() * 15));
+                this.setX(getX() + (rnd.nextInt(30) - 15));
+                this.setY(getY() + (rnd.nextInt(30) - 15));
                 if (isOutOfBounds()) {
-                    this.setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-                    this.setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+                    double candidateX;
+                    double candidateY;
+
+                    do {
+                        candidateX = rnd.nextDouble() * Globals.WINDOW_WIDTH;
+                        candidateY = rnd.nextDouble() * Globals.WINDOW_HEIGHT;
+                    }while (candidateX == Globals.snakeHeadX && candidateY == Globals.snakeHeadY);
+
+                    setX(candidateX);
+                    setY(candidateY);
                 }
             }
         }
