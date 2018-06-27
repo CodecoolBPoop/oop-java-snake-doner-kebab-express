@@ -22,14 +22,23 @@ public class GameLoop extends AnimationTimer {
                 animObject.step();
             }
         }
-        spawnMoreEnemies();
+
+        if (Globals.numberOfPlayers == 1) {
+            spawnMoreEnemies();
+        }
+
         spawnMorePowerUps();
+
 
         Globals.gameObjects.addAll(Globals.newGameObjects);
         Globals.newGameObjects.clear();
 
         Globals.gameObjects.removeAll(Globals.oldGameObjects);
         Globals.oldGameObjects.clear();
+
+        if (Globals.isPlayerDead[0] == true && Globals.isPlayerDead[1] == true) {
+            this.stop();
+        }
     }
 
     private int countEnemies(){

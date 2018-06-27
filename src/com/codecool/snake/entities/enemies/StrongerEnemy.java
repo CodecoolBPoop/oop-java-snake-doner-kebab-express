@@ -61,8 +61,10 @@ public class StrongerEnemy extends GameEntity implements Animatable, Interactabl
 
     @Override
     public void apply(SnakeHead player) {
-        player.changeHealth(-damage);
-        destroy();
+        if (!player.isInvulnerable()) {
+            player.changeHealth(-damage);
+            destroy();
+        }
     }
 
     @Override

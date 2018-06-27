@@ -1,6 +1,5 @@
 package com.codecool.snake.entities.snakes;
 
-import com.codecool.snake.Game;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
@@ -21,6 +20,8 @@ public class SnakeHead extends GameEntity implements Animatable {
     private double currentY;
     private double currentDir;
     private long laserLastShot;
+    private boolean isInvulnerable;
+    private long invulnerabilityTimer;
 
     public SnakeHead(Pane pane, int xc, int yc, int snakeID) {
         super(pane);
@@ -28,6 +29,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         setY(yc);
         health = 100;
         tail = this;
+        isInvulnerable = false;
         this.snakeID = snakeID;
         setImage(Globals.snakeHead);
         pane.getChildren().add(this);
@@ -42,6 +44,12 @@ public class SnakeHead extends GameEntity implements Animatable {
     }
 
     public void step() {
+        if (isInvulnerable) {
+            if (System.currentTimeMillis() - invulnerabilityTimer > 10000) {
+                isInvulnerable = false;
+                setImage(Globals.snakeHead);
+            }
+        }
         double dir = getRotate();
         if (Globals.leftKeyDown[snakeID]) {
             dir = dir - turnRate;
@@ -93,8 +101,9 @@ public class SnakeHead extends GameEntity implements Animatable {
 
         // check for game over condition
         if (isOutOfBounds() || health <= 0) {
-            System.out.println("Game Over");
-            Globals.gameLoop.stop();
+            System.out.println("Game Over for snake" + snakeID);
+            collision(snakeID);
+            Globals.isPlayerDead[snakeID] = true;
         }
     }
 
@@ -111,6 +120,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     }
 
     public void collision(int snakeID) {
+        Globals.isPlayerDead[snakeID] = true;
         for (GameEntity entity : Globals.getGameObjects()) {
             if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
                 if (entity instanceof SnakeBody) {
@@ -136,4 +146,15 @@ public class SnakeHead extends GameEntity implements Animatable {
     }
 
 
+    public boolean isInvulnerable() {
+        return isInvulnerable;
+    }
+
+    public void setInvulnerable(boolean invulnerable) {
+        isInvulnerable = invulnerable;
+    }
+
+    public void setInvulnerabilityTimer() {
+        this.invulnerabilityTimer = System.currentTimeMillis();
+    }
 }
