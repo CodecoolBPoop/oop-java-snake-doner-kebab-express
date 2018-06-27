@@ -33,6 +33,8 @@ public class Globals {
     public static boolean[] shootingKeyDown = new boolean[2];
     public static boolean[] isInvulnerable = new boolean[2];
     public static Text[] textOfHealth = new Text[2];
+    public static int numberOfPlayers;
+    public static boolean[] isPlayerDead = {false, false};
 
     public static List<GameEntity> gameObjects;
     public static List<GameEntity> newGameObjects; // Holds game objects created in this frame.
