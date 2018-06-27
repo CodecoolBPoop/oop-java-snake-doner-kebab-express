@@ -141,6 +141,8 @@ public class SnakeHead extends GameEntity implements Animatable {
         return this.snakeID;
     }
 
+    public double getCurrentY() { return this.currentY; }
+
 
     public boolean isInvulnerable() {
         return isInvulnerable;

@@ -22,13 +22,16 @@ public class Game extends Pane {
 
     public void start(int numberOfPlayers) {
 
+        Globals.gameObjects.clear();
+        getChildren().clear();
+
         Globals.numberOfPlayers = numberOfPlayers;
 
         Scene scene = getScene();
         setPlayers(scene);
 
-        if (numberOfPlayers == 1) { setEnemies(); }
-
+        //if (numberOfPlayers == 1) { setEnemies(); }
+        System.out.println(Globals.leftKeyDown[1]);
         setPowerUps();
 
         Globals.addTextOfHealths();
@@ -37,6 +40,7 @@ public class Game extends Pane {
 
         Globals.gameLoop = new GameLoop();
         Globals.gameLoop.start();
+
     }
 
     private void setPlayers(Scene scene) {
@@ -49,6 +53,7 @@ public class Game extends Pane {
                 case LEFT:  Globals.leftKeyDown[0] = true; break;
                 case RIGHT: Globals.rightKeyDown[0] = true; break;
                 case M: Globals.shootingKeyDown[0] = true; break;
+                case R: Globals.gameLoop.stop(); this.start(Globals.numberOfPlayers);
                 case A: if (Globals.numberOfPlayers == 2) { Globals.leftKeyDown[1] = true; break; }
                 case D: if (Globals.numberOfPlayers == 2) { Globals.rightKeyDown[1] = true; break; }
                 case W: if (Globals.numberOfPlayers == 2) { Globals.shootingKeyDown[1] = true; break; }
@@ -65,7 +70,8 @@ public class Game extends Pane {
                 case W: if (Globals.numberOfPlayers == 2) { Globals.shootingKeyDown[1] = false; break; }
             }
         });
-
+        Globals.leftKeyDown[0] = false;
+        Globals.leftKeyDown[1] = false;
     }
 
     private void setEnemies() {
@@ -89,5 +95,12 @@ public class Game extends Pane {
         new BuffedFood(this);
         new BuffedFood(this);
         new BuffedFood(this);
+    }
+
+    private void controlInit() {
+        Globals.leftKeyDown[0] = false;
+        Globals.leftKeyDown[1] = false;
+        Globals.rightKeyDown[0] = false;
+        Globals.rightKeyDown[1] = false;
     }
 }
