@@ -1,6 +1,7 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.enemies.SimpleEnemy;
+import com.codecool.snake.entities.enemies.StrongerEnemy;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.Scene;
@@ -15,11 +16,17 @@ public class Game extends Pane {
         SnakeHead player1 = new SnakeHead(this, 500, 500, 0);
         SnakeHead player2 = new SnakeHead(this, 700, 400, 1);
 
-
         new SimpleEnemy(this);
         new SimpleEnemy(this);
         new SimpleEnemy(this);
         new SimpleEnemy(this);
+        new StrongerEnemy(this);
+        new StrongerEnemy(this);
+        new StrongerEnemy(this);
+        new StrongerEnemy(this);
+        new StrongerEnemy(this);
+        new StrongerEnemy(this);
+        new StrongerEnemy(this);
 
         new SimplePowerup(this);
         new SimplePowerup(this);
@@ -38,6 +45,8 @@ public class Game extends Pane {
                 case RIGHT: Globals.rightKeyDown[0] = true; break;
                 case A:  Globals.leftKeyDown[1] = true; break;
                 case D: Globals.rightKeyDown[1] = true; break;
+                case M: Globals.shootingKeyDown[0] = true; break;
+                case W: Globals.shootingKeyDown[1] = true; break;
             }
         });
 
@@ -47,6 +56,8 @@ public class Game extends Pane {
                 case RIGHT: Globals.rightKeyDown[0] = false; break;
                 case A:  Globals.leftKeyDown[1] = false; break;
                 case D: Globals.rightKeyDown[1] = false; break;
+                case M: Globals.shootingKeyDown[0] = false; break;
+                case W: Globals.shootingKeyDown[1] = false; break;
             }
         });
         Globals.gameLoop = new GameLoop();
