@@ -29,7 +29,7 @@ public class Game extends Pane {
 
         if (numberOfPlayers == 1) { setEnemies(); }
 
-        setPowerUps();
+        //setPowerUps();
 
         Globals.addTextOfHealths();
         this.getChildren().add(Globals.textOfHealth[0]);
