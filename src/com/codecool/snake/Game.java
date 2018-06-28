@@ -1,6 +1,7 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.enemies.AnnoyingEnemy;
+import com.codecool.snake.entities.enemies.ChaserEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.enemies.StrongerEnemy;
 import com.codecool.snake.entities.powerups.BuffedFood;

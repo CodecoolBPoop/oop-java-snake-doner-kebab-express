@@ -3,6 +3,7 @@ package com.codecool.snake;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.enemies.AnnoyingEnemy;
+import com.codecool.snake.entities.enemies.ChaserEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.enemies.StrongerEnemy;
 import com.codecool.snake.entities.powerups.BuffedFood;
@@ -71,6 +72,8 @@ public class GameLoop extends AnimationTimer {
             Globals.newGameObjects.add(new StrongerEnemy(Globals.game));
         }else if(rnd == 270){
             Globals.newGameObjects.add(new AnnoyingEnemy(Globals.game));
+        }else if(rnd == 280){
+            //Globals.newGameObjects.add(new ChaserEnemy(Globals.game));
         }
     }
 
