@@ -30,7 +30,6 @@ public class Game extends Pane {
         Scene scene = getScene();
         setPlayers(scene);
 
-        //if (numberOfPlayers == 1) { setEnemies(); }
         setPowerUps();
 
         Globals.addTextOfHealths();
@@ -51,9 +50,9 @@ public class Game extends Pane {
                 case LEFT:  Globals.leftKeyDown[0] = true; break;
                 case RIGHT: Globals.rightKeyDown[0] = true; break;
                 case M: Globals.shootingKeyDown[0] = true; break;
-                case A: if (Globals.numberOfPlayers == 2) { Globals.leftKeyDown[1] = true; break; }
-                case D: if (Globals.numberOfPlayers == 2) { Globals.rightKeyDown[1] = true; break; }
-                case W: if (Globals.numberOfPlayers == 2) { Globals.shootingKeyDown[1] = true; break; }
+                case A: if (Globals.numberOfPlayers == 2) { Globals.leftKeyDown[1] = true; } break;
+                case D: if (Globals.numberOfPlayers == 2) { Globals.rightKeyDown[1] = true; } break;
+                case W: if (Globals.numberOfPlayers == 2) { Globals.shootingKeyDown[1] = true; } break;
                 case R: Globals.gameLoop.stop(); this.start(Globals.numberOfPlayers);
             }
         });
@@ -63,26 +62,13 @@ public class Game extends Pane {
                 case LEFT:  Globals.leftKeyDown[0] = false; break;
                 case RIGHT: Globals.rightKeyDown[0] = false; break;
                 case M: Globals.shootingKeyDown[0] = false; break;
-                case A: if (Globals.numberOfPlayers == 2) { Globals.leftKeyDown[1] = false; break; }
-                case D: if (Globals.numberOfPlayers == 2) { Globals.rightKeyDown[1] = false; break; }
-                case W: if (Globals.numberOfPlayers == 2) { Globals.shootingKeyDown[1] = false; break; }
+                case A: if (Globals.numberOfPlayers == 2) { Globals.leftKeyDown[1] = false; } break;
+                case D: if (Globals.numberOfPlayers == 2) { Globals.rightKeyDown[1] = false; } break;
+                case W: if (Globals.numberOfPlayers == 2) { Globals.shootingKeyDown[1] = false; } break;
             }
         });
         Globals.leftKeyDown[0] = false;
         Globals.leftKeyDown[1] = false;
-    }
-
-    private void setEnemies() {
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        new StrongerEnemy(this);
-        new StrongerEnemy(this);
-        new AnnoyingEnemy(this);
-        new AnnoyingEnemy(this);
-        new AnnoyingEnemy(this);
-
     }
 
     private void setPowerUps() {
@@ -95,10 +81,4 @@ public class Game extends Pane {
         new BuffedFood(this);
     }
 
-    private void controlInit() {
-        Globals.leftKeyDown[0] = false;
-        Globals.leftKeyDown[1] = false;
-        Globals.rightKeyDown[0] = false;
-        Globals.rightKeyDown[1] = false;
-    }
 }
