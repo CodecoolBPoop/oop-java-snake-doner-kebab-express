@@ -13,16 +13,16 @@ import javafx.geometry.Point2D;
 public class Laser extends GameEntity implements Interactable,Animatable {
 
     private Point2D heading;
-    private double speed = 2;
+    private double speed = 4;
 
     public Laser(Pane pane, SnakeHead snakeHead){
         super(pane);
         setImage(Globals.laserShot);
         pane.getChildren().add(this);
-        setX(snakeHead.getCurrentX());
-        setY(snakeHead.getCurrentY());
-        setRotate(snakeHead.getCurrentDir());
-        heading = Utils.directionToVector(snakeHead.getCurrentDir(),speed);
+        setX(Globals.snakeHeadX);
+        setY(Globals.snakeHeadY);
+        setRotate(Globals.snakeHeadDir);
+        heading = Utils.directionToVector(Globals.snakeHeadDir,speed);
     }
 
 
@@ -51,9 +51,14 @@ public class Laser extends GameEntity implements Interactable,Animatable {
 
         for (GameEntity entity : Globals.getGameObjects()) {
             if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
-                if (entity instanceof SimpleEnemy || entity instanceof StrongerEnemy) {
+                if (entity instanceof SimpleEnemy) {
                     apply(entity);
+                    this.destroy();
                     System.out.println("Enemy killed!");
+                }
+                if (entity instanceof StrongerEnemy) {
+                    this.destroy();
+                    ((StrongerEnemy) entity).decreseHealth();
                 }
             }
         }
