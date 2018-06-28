@@ -23,6 +23,7 @@ public class Globals {
     public static Image[] snakeBody = {new Image("snake_body0.png"), new Image("snake_body1.png")};
     public static Image simpleEnemy = new Image("simple_enemy.png");
     public static Image strongerEnemy = new Image("stronger_enemy.png", 40, 40, true, true);
+    public static Image chaserEnemy = new Image("chaser_enemy2.gif", 40, 40, true, true);
     public static Image annoyingEnemy = new Image("annoying_enemy.png", 40, 40, true, true);
     public static Image powerupBerry = new Image("powerup_berry.png");
     public static Image buffedFood = new Image("buffed_food.png", 40, 40, true, true);
