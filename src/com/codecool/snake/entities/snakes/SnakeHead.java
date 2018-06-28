@@ -102,7 +102,8 @@ public class SnakeHead extends GameEntity implements Animatable {
         // check for game over condition
         if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over for snake" + snakeID);
-            collision(snakeID);
+            Globals.isPlayerDead[snakeID] = true;
+            destroy();
         }
     }
 
@@ -120,19 +121,21 @@ public class SnakeHead extends GameEntity implements Animatable {
     }
 
     public void collision(int snakeID) {
-        Globals.isPlayerDead[snakeID] = true;
-        for (GameEntity entity : Globals.getGameObjects()) {
-            if (entity instanceof SnakeBody) {
-                if (((SnakeBody) entity).getSnakeID() == snakeID) {
-                    entity.destroy();
+        if (!isInvulnerable) {
+            Globals.isPlayerDead[snakeID] = true;
+            for (GameEntity entity : Globals.getGameObjects()) {
+                if (entity instanceof SnakeBody) {
+                    if (((SnakeBody) entity).getSnakeID() == snakeID) {
+                        entity.destroy();
+                    }
                 }
-            }
-            if (entity instanceof SnakeHead) {
-                if (((SnakeHead) entity).getSnakeID() == snakeID) {
-                    entity.destroy();
+                if (entity instanceof SnakeHead) {
+                    if (((SnakeHead) entity).getSnakeID() == snakeID) {
+                        entity.destroy();
+                    }
                 }
-            }
 
+            }
         }
     }
 
