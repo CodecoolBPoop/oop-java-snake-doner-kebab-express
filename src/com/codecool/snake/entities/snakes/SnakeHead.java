@@ -11,8 +11,8 @@ import javafx.scene.layout.Pane;
 
 public class SnakeHead extends GameEntity implements Animatable {
 
-    private static final float speed = 2;
-    private static final float turnRate = 2;
+    private static final float speed = 1;
+    private static final float turnRate = 1;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
     private int snakeID;
@@ -103,7 +103,6 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over for snake" + snakeID);
             collision(snakeID);
-            Globals.isPlayerDead[snakeID] = true;
         }
     }
 
@@ -123,18 +122,17 @@ public class SnakeHead extends GameEntity implements Animatable {
     public void collision(int snakeID) {
         Globals.isPlayerDead[snakeID] = true;
         for (GameEntity entity : Globals.getGameObjects()) {
-            if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
-                if (entity instanceof SnakeBody) {
-                    if (((SnakeBody) entity).getSnakeID() == snakeID) {
-                        entity.destroy();
-                    }
-                }
-                if (entity instanceof SnakeHead) {
-                    if (((SnakeHead) entity).getSnakeID() == snakeID) {
-                        entity.destroy();
-                    }
+            if (entity instanceof SnakeBody) {
+                if (((SnakeBody) entity).getSnakeID() == snakeID) {
+                    entity.destroy();
                 }
             }
+            if (entity instanceof SnakeHead) {
+                if (((SnakeHead) entity).getSnakeID() == snakeID) {
+                    entity.destroy();
+                }
+            }
+
         }
     }
 
