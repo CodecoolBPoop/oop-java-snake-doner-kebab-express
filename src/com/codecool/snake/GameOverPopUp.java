@@ -44,10 +44,30 @@ public class GameOverPopUp {
         dialogVbox.getChildren().add(okButton);
 
 
-
-        Scene dialogScene = new Scene(dialogVbox, 350, 150);
+        Scene dialogScene = new Scene(dialogVbox, 350, 200);
         dialog.setScene(dialogScene);
         dialog.show();
+
+        Button restart = new Button("RESTART");
+        dialogVbox.getChildren().add(restart);
+        restart.setOnAction(new EventHandler<ActionEvent>(){
+
+            @Override
+            public void handle(ActionEvent arg0) {
+                Globals.gameObjects.clear();
+                Globals.game.getChildren().clear();
+                dialog.close();
+                Globals.isPlayerDead[0] = false;
+                Globals.snakeLengths[0] = 0;
+                if(Globals.numberOfPlayers == 2) {
+                    Globals.isPlayerDead[1] = false;
+                    Globals.snakeLengths[1] = 0;
+                }
+                Globals.game.start(Globals.numberOfPlayers);
+            }
+
+        });
+
 
     }
 
